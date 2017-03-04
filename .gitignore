@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+bower_components/
+
+# Built files
+public/
+
+# Database
+data/
+
+# Secret keys
+auth.js
+
+# Debug output
+npm-debug.log
