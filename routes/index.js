@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 router.get('/auth/facebook', passport.authenticate('facebook'));
 
 router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/login'}),
+  passport.authenticate('facebook', {failureRedirect: '/'}),
   (req, res, next) => res.redirect('/home'));
 
 router.get('/logout', (req, res, next) => {
