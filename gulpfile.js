@@ -3,6 +3,7 @@ const sass = require('gulp-sass');
 const webpack = require('webpack-stream');
 const server = require('gulp-develop-server');
 const clean = require('gulp-clean');
+const mocha = require('gulp-mocha');
 
 const paths = {
   styles: {
@@ -28,6 +29,9 @@ const paths = {
       '!public/**',
     ]
   },
+  spec: {
+    files: './spec/**/*.js',
+  },
   scripts: {
     start: 'bin/www',
   },
@@ -39,6 +43,20 @@ const paths = {
     ],
   }
 };
+
+gulp.task('default', ['build', 'server:start'], () => {
+  gulp.watch(paths.serverJS.files, ['server:restart']);
+  gulp.watch(paths.clientJS.files, ['babel']);
+  gulp.watch(paths.styles.files, ['sass']);
+});
+
+gulp.task('build', ['sass', 'babel']);
+
+gulp.task('spec', () => {
+  gulp.src(paths.spec.files, {read: false})
+    // gulp-mocha needs filepaths so you can't have any plugins before it
+    .pipe(mocha());
+});
 
 gulp.task('clean', function () {
   gulp.src(paths.clean.paths, {read: false})
@@ -56,14 +74,6 @@ gulp.task('server:start', () => {
 gulp.task('server:restart', () => {
   server.restart();
 });
-
-gulp.task('default', ['build', 'server:start'], () => {
-  gulp.watch(paths.serverJS.files, ['server:restart']);
-  gulp.watch(paths.clientJS.files, ['babel']);
-  gulp.watch(paths.styles.files, ['sass']);
-});
-
-gulp.task('build', ['sass', 'babel']);
 
 gulp.task('babel', () => {
   gulp.src(paths.clientJS.entry)

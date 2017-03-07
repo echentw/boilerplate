@@ -15,6 +15,9 @@ Included
 * [Handlebars](https://github.com/wycats/handlebars.js/) - templating library
 * [React](https://github.com/facebook/react) - front-end library
 * [Foundation](https://github.com/zurb/foundation-sites) - css framework
+* [Mocha](https://github.com/mochajs/mocha) - testing framework
+* [Chai](https://github.com/chaijs/chai) - assertion library
+* [SuperTest](https://github.com/visionmedia/supertest) - testing HTTP endpoints
 
 Install
 -------
